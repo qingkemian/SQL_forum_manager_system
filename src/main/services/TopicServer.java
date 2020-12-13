@@ -53,7 +53,7 @@ public class TopicServer {
         try {
             return topicDao.getTopicByTitle(title);
         } catch (SQLException e) {
-            System.out.println("SectionServer-queryTopicByTitle Error:"+e);
+            System.out.println("TopicServer-queryTopicByTitle Error:"+e);
             return null;
         }
     }
@@ -64,7 +64,7 @@ public class TopicServer {
         try {
             return topicDao.updateTopic(topic);
         } catch (SQLException e) {
-            System.out.println("SectionServer-updateTopic Error:"+e);
+            System.out.println("TopicServer-updateTopic Error:"+e);
             return false;
         }
     }
