@@ -48,23 +48,23 @@ public class SectionServer {
     }
 
     // 查询版块
-    public List<Section> queryStafffBySectinName(String sectionName)
+    public List<Section> querySectionBySectionName(String sectionName)
     {
         try {
             return sectionDao.getSectionBySectionName(sectionName);
         } catch (SQLException e) {
-            System.out.println("SectionServer-queryStafffBySectinName Error:"+e);
+            System.out.println("SectionServer-querySectionBySectionName Error:"+e);
             return null;
         }
     }
 
     // 更新版块
-    public boolean updateSectin(Section section)
+    public boolean updateSection(Section section)
     {
         try {
             return sectionDao.updateSection(section);
         } catch (SQLException e) {
-            System.out.println("SectionServer-updateSectin Error:"+e);
+            System.out.println("SectionServer-updateSectoin Error:"+e);
             return false;
         }
     }

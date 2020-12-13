@@ -45,7 +45,7 @@ public class TopicDao {
         return result>=1?true:false;
     }
 
-    // 在数据库中新建版块
+    // 在数据库中新建主题帖
     public boolean createTopic(Topic topic) throws SQLException
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
@@ -54,7 +54,7 @@ public class TopicDao {
         return result>=1?true:false;
     }
 
-    // 在数据库中修改版块
+    // 在数据库中修改主题帖
     public boolean updateTopic(Topic topic) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="update topic set tSectionID=?,tReplyCount=?,tTitle=?,tContents=? where sID=?";
@@ -62,7 +62,7 @@ public class TopicDao {
         return result>=1?true:false;
     }
 
-    // 从数据库中查询版块
+    // 从数据库中查询主题帖
     public List<Topic> getTopicByTitle(String title) throws SQLException
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
