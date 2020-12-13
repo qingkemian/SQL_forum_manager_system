@@ -2,7 +2,6 @@ package main.dao;
 
 import main.model.Section;
 import main.model.Topic;
-import main.model.User;
 import main.utils.DBUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -64,10 +63,10 @@ public class SectionDao {
     }
 
     // 从数据库中查询版块
-    public Section getSectionBySectionName(String sectionName) throws SQLException
+    public List<Section> getSectionBySectionName(String sectionName) throws SQLException
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="select * from section where sName=?";
-        return runner.query(sql,new BeanHandler<Section>(Section.class),sectionName);
+        return runner.query(sql,new BeanListHandler<Section>(Section.class),sectionName);
     }
 }
