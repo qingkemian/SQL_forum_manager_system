@@ -14,6 +14,19 @@ import java.util.List;
 public class UserServer {
     private UserDao userDao = new UserDao();
 
+    // （登录）传入user对象 判断用户密码是否正确
+    public boolean Login(User user)
+    {
+        try {
+            boolean result=userDao.IdentifyAdministrator(user);
+            return result;
+        } catch (SQLException e) {
+            System.out.println("UserServer-Login Error:"+e);
+            return false;
+        }
+    }
+
+    // 获取所有user信息
     public List<User> getAllUser()
     {
         try {
@@ -21,6 +34,50 @@ public class UserServer {
         } catch (SQLException e) {
             System.out.println("UserServer-getAllUser Error:"+e);
             return null;
+        }
+    }
+
+    // 创建新用户
+    public boolean createUser(User user)
+    {
+        try {
+            return userDao.createUser(user);
+        } catch (SQLException e) {
+            System.out.println("UserServer-createUser Error:"+e);
+            return false;
+        }
+    }
+
+    // 删除用户
+    public boolean deleteUser(int userID)
+    {
+        try {
+            return userDao.deleteUser(userID);
+        } catch (SQLException e) {
+            System.out.println("UserServer-deleteUser Error:"+e);
+            return false;
+        }
+    }
+
+    // 查询用户
+    public User queryUserByUserID(int userID)
+    {
+        try {
+            return userDao.getUserByUserID(userID);
+        } catch (SQLException e) {
+            System.out.println("UserServer-queryUserByUserID Error:"+e);
+            return null;
+        }
+    }
+
+    // 修改用户信息
+    public boolean updateUser(User user)
+    {
+        try {
+            return userDao.updateUser(user);
+        } catch (SQLException e) {
+            System.out.println("UserServer-updateUser Error:"+e);
+            return false;
         }
     }
 }

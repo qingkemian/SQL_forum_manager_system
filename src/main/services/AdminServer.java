@@ -11,8 +11,10 @@ import java.sql.SQLException;
  * @日期:2020-12-13 15:04
  */
 public class AdminServer {
-    // 将id password传入admin中 在admindao中对身份进行验证
+    //  需要调用AdminDao中的方法
     private AdminDao adminDao = new AdminDao();
+
+    // （登录）将id password传入admin中 判断用户密码是否正确
     public boolean adminLogin(int id,String password)
     {
         Admin admin = new Admin();
