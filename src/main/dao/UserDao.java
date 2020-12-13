@@ -20,8 +20,9 @@ import java.util.List;
  */
 public class UserDao {
 
-    // 在数据库中对用户登录身份验证 如果id和密码正确就返回true 否则返回false
-    public boolean IdentifyAdministrator(User user) throws SQLException {
+    // （查）在数据库中对用户登录身份验证 如果id和密码正确就返回true 否则返回false
+    public boolean IdentifyAdministrator(User user) throws SQLException
+    {
         QueryRunner runner= new QueryRunner(DBUtils.getDataSource());
         String sql="select * from u where uID=? and userPassword=?";
         User temp=runner.query(sql, new BeanHandler<User>(User.class),user.getuID(),user.getUserPassword());
@@ -31,15 +32,17 @@ public class UserDao {
             return false;
     }
 
-    // 从数据库中读取所有用户信息
-    public List<User> getAllUser() throws SQLException {
+    // （查）从数据库中读取所有用户信息
+    public List<User> getAllUser() throws SQLException
+    {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="select * from u";
         return runner.query(sql,new BeanListHandler<User>(User.class));
     }
 
-    // 删除用户
-    public boolean deleteUser(int userID) throws SQLException {
+    // （删/改）从数据库中删除用户
+    public boolean deleteUser(int userID) throws SQLException
+    {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
 
         // 将该用户的所有回复 所有权改为 用户0
@@ -75,8 +78,33 @@ public class UserDao {
             runner.execute(sql,0,sectionList.get(i).getsID());
         }
 
-        sql="delete from dept where deptID=?";
+        // 将改用户从u表删除
+        sql="delete from u where uID=?";
         int result = runner.execute(sql,userID);
+        return result>=1?true:false;
+    }
+
+    // （查）在数据库中通过用户id查找用户
+    public User getUserByUserID(int userID) throws SQLException
+    {
+        QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
+        String sql="select * from u where uID=?";
+        return runner.query(sql,new BeanHandler<User>(User.class),userID);
+    }
+
+    // （增）在数据库中创建新用户
+    public boolean createUser(User user) throws SQLException {
+        QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
+        String sql="insert into u values(?,?,?,?,?,?)";
+        int result = runner.execute(sql,user.getuID(),user.getUserName(),user.getUserPassword(),user.getuSex(),user.getUserEmail(),user.getUserBirthday());
+        return result>=1?true:false;
+    }
+
+    // （改）在数据库中更改用户信息
+    public boolean updateUser(User user) throws SQLException {
+        QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
+        String sql="update u set userName=? where uID=?";
+        int result = runner.execute(sql,user.getUserName(),user.getuID());
         return result>=1?true:false;
     }
 }
