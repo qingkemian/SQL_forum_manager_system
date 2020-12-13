@@ -103,8 +103,8 @@ public class UserDao {
     // （改）在数据库中更改用户信息
     public boolean updateUser(User user) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update u set userName=? where uID=?";
-        int result = runner.execute(sql,user.getUserName(),user.getuID());
+        String sql="update u set userName=?,userPassword=? where uID=?";
+        int result = runner.execute(sql,user.getUserName(),user.getUserPassword(),user.getuID());
         return result>=1?true:false;
     }
 }
