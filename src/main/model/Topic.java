@@ -11,7 +11,7 @@ public class Topic {
     private int tID;
     private int tSectionID;
     private int tUserID;
-    private int tReplyCoun;
+    private int tReplyCount;
     private String tTitle;
     private String tContents;
     private Timestamp tTime;
@@ -40,12 +40,12 @@ public class Topic {
         this.tUserID = tUserID;
     }
 
-    public int gettReplyCoun() {
-        return tReplyCoun;
+    public int gettReplyCount() {
+        return tReplyCount;
     }
 
-    public void settReplyCoun(int tReplyCoun) {
-        this.tReplyCoun = tReplyCoun;
+    public void settReplyCount(int tReplyCoun) {
+        this.tReplyCount = tReplyCoun;
     }
 
     public String gettTitle() {
