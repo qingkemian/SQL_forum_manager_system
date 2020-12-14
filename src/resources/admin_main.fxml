@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            xmlns:fx="http://javafx.com/fxml" fx:controller="main.controller.MainController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.MainController">
     <children>
-        <Hyperlink layoutX="86.0" layoutY="111.0" text="退出登录！" onAction="#OUT_M">
+        <Hyperlink layoutX="580.0" layoutY="4.0" onAction="#OUT_M" text="退出登录！">
             <font>
-                <Font size="45.0" />
+                <Font size="10.0" />
             </font>
         </Hyperlink>
+      <MenuBar prefWidth="580.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="用户管理">
+            <items>
+              <MenuItem mnemonicParsing="false" text="查看所有用户" />
+                  <MenuItem mnemonicParsing="false" text="添加新用户" />
+                  <MenuItem mnemonicParsing="false" text="删除用户" />
+                  <MenuItem mnemonicParsing="false" text="查找用户" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="版块管理">
+            <items>
+              <MenuItem mnemonicParsing="false" text="查看所有版块" />
+                  <MenuItem mnemonicParsing="false" text="添加新版块" />
+                  <MenuItem mnemonicParsing="false" text="删除版块" />
+                  <MenuItem mnemonicParsing="false" text="查找版块" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="主题帖管理">
+            <items>
+              <MenuItem mnemonicParsing="false" text="查看所有主题帖" />
+                  <MenuItem mnemonicParsing="false" text="添加主题帖" />
+                  <MenuItem mnemonicParsing="false" text="删除主题帖" />
+                  <MenuItem mnemonicParsing="false" text="查找主题帖" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="回复帖管理">
+              <items>
+                <MenuItem mnemonicParsing="false" text="查看所有回复帖" />
+                  <MenuItem mnemonicParsing="false" text="添加回复帖" />
+                  <MenuItem mnemonicParsing="false" text="删除回复帖" />
+                  <MenuItem mnemonicParsing="false" text="查找回复帖" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane layoutY="24.0" prefHeight="364.0" prefWidth="629.0">
+         <children>
+            <HBox prefHeight="372.0" prefWidth="638.0" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
