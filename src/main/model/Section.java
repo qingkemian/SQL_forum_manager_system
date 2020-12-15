@@ -6,40 +6,40 @@ package main.model;
  * @日期:2020-12-13 14:41
  */
 public class Section {
-    private int sID;
-    private String sName;
-    private int sMasterID;
-    private String sStatement;
+    private int sectionID;
+    private String sectionName;
+    private int sectionMasterID;
+    private String sectionStatement;
 
-    public int getsID() {
-        return sID;
+    public int getSectionID() {
+        return sectionID;
     }
 
-    public void setsID(int sID) {
-        this.sID = sID;
+    public void setSectionID(int sectionID) {
+        this.sectionID = sectionID;
     }
 
-    public String getsName() {
-        return sName;
+    public String getSectionName() {
+        return sectionName;
     }
 
-    public void setsName(String sName) {
-        this.sName = sName;
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
     }
 
-    public int getsMasterID() {
-        return sMasterID;
+    public int getSectionMasterID() {
+        return sectionMasterID;
     }
 
-    public void setsMasterID(int sMasterID) {
-        this.sMasterID = sMasterID;
+    public void setSectionMasterID(int sectionMasterID) {
+        this.sectionMasterID = sectionMasterID;
     }
 
-    public String getsStatement() {
-        return sStatement;
+    public String getSectionStatement() {
+        return sectionStatement;
     }
 
-    public void setsStatement(String sStatement) {
-        this.sStatement = sStatement;
+    public void setSectionStatement(String sectionStatement) {
+        this.sectionStatement = sectionStatement;
     }
 }

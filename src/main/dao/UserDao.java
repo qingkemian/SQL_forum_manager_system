@@ -75,7 +75,7 @@ public class UserDao {
         for(int i=0;i<sectionList.size();i++)
         {
             sql="update section set sectionMasterID=? where sectionID=?";
-            runner.execute(sql,0,sectionList.get(i).getsID());
+            runner.execute(sql,0,sectionList.get(i).getSectionID());
         }
 
         // 将改用户从u表删除

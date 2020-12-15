@@ -30,17 +30,17 @@ public class SectionDao {
 
         // 将该版块下的主题帖都归类到 版块0
         // 选取该版块下所有主题帖
-        String sql="select * from topic where tSectionID=?";
+        String sql="select * from topic where topicSectionID=?";
         List<Topic> topicList=runner.query(sql,new BeanListHandler<Topic>(Topic.class),sectionID);
         // 更改主题帖归属
         for(int i=0;i<topicList.size();i++)
         {
-            sql="update topic set tSectionID=? where tID=?";
+            sql="update topic set topicSectionID=? where topicID=?";
             runner.execute(sql,0,topicList.get(i).getTopicID());
         }
 
         // 删除该版块
-        sql="delete from section where sID=?";
+        sql="delete from section where sectionID=?";
         int result = runner.execute(sql,sectionID);
         return result>=1?true:false;
     }
@@ -50,15 +50,15 @@ public class SectionDao {
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into section values(?,?,?,?);";
-        int result=runner.execute(sql,section.getsID(),section.getsName(),section.getsMasterID(),section.getsStatement());
+        int result=runner.execute(sql,section.getSectionID(),section.getSectionName(),section.getSectionMasterID(),section.getSectionStatement());
         return result>=1?true:false;
     }
 
     // 在数据库中修改版块
     public boolean updateSection(Section section) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update section set sName=?,sStatement=? where sID=?";
-        int result=runner.execute(sql,section.getsName(),section.getsStatement(),section.getsID());
+        String sql="update section set sectionName=?,sectionStatement=? where sectionID=?";
+        int result=runner.execute(sql,section.getSectionName(),section.getSectionStatement(),section.getSectionID());
         return result>=1?true:false;
     }
 
@@ -66,7 +66,7 @@ public class SectionDao {
     public List<Section> getSectionBySectionName(String sectionName) throws SQLException
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="select * from section where sName=?";
+        String sql="select * from section where sectionName=?";
         return runner.query(sql,new BeanListHandler<Section>(Section.class),sectionName);
     }
 }
