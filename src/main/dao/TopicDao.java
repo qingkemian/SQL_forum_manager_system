@@ -30,12 +30,12 @@ public class TopicDao {
 
         // 将该主题帖下的回复帖都归类到 主题帖0
         // 选取该主题帖下所有回复帖
-        String sql="select * from reply where replyTopicID=?";
+        String sql="select * from reply where reTopicID=?";
         List<Reply> replyList=runner.query(sql,new BeanListHandler<Reply>(Reply.class),topicID);
         // 更改回复帖归属
         for(int i=0;i<replyList.size();i++)
         {
-            sql="update reply set replyTopicID=? where replyID=?";
+            sql="update reply set reTopicID=? where reID=?";
             runner.execute(sql,0,replyList.get(i).getReID());
         }
 

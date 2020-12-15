@@ -47,12 +47,12 @@ public class UserDao {
 
         // 将该用户的所有回复 所有权改为 用户0
         // 选取reply表中该用户的所有记录
-        String sql="select * from reply where replyUserID=?";
+        String sql="select * from reply where reUserID=?";
         List<Reply> replyList=runner.query(sql,new BeanListHandler<Reply>(Reply.class),userID);
         // 将所有该用户的回复 的 用户id 更改为0
         for(int i=0;i<replyList.size();i++)
         {
-            sql="update reply set replyUserID=? where replyReID=?";
+            sql="update reply set reUserID=? where reReID=?";
             runner.execute(sql,0,replyList.get(i).getReID());
         }
 
