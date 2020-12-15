@@ -6,6 +6,7 @@ package main;
  * @日期:2020-12-13 15:18
  */
 
+import javafx.scene.control.Alert;
 import main.controller.MainController;
 
 import java.io.InputStream;
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.controller.LoginController;
 import main.services.AdminServer;
+import main.tools.SimpleTools;
 
 /**
  *
@@ -39,6 +41,9 @@ public class AdminLogin extends Application {
         gotologin();
         stage.show();
     }
+
+
+
     public void gotologin(){
         try {
             LoginController login = (LoginController) replaceSceneContent("../resources/admin_login.fxml");
@@ -57,8 +62,13 @@ public class AdminLogin extends Application {
     }
     public void userlogin(int account,String password){
         AdminServer ad = new AdminServer();
+        SimpleTools simpleTools = new SimpleTools();
         if(ad.adminLogin(account,password)){
+            simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "登录成功！");
             gotomain();
+
+        } else {
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "不正确！");
         }
     }
     public void useroutmain(){
