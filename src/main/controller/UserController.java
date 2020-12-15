@@ -41,27 +41,6 @@ public class UserController {
 
     public void initialize()
     {
-        System.out.println("hello");
-
-        UserServer userServer = new UserServer();
-
-        List<User> userList = userServer.getAllUser();
-
-        if(userList != null)
-        {
-            for (int j=0;j<userList.size();j++)
-            {
-                System.out.println("id"+userList.get(j).getUserID());
-                System.out.println("name"+userList.get(j).getUserName());
-                System.out.println("sex"+userList.get(j).getUserSex());
-            }
-        }
-        else
-        {
-            System.out.println("null");
-        }
-
-
         // 映射数据进每列
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("userID"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("userName"));
@@ -70,13 +49,11 @@ public class UserController {
         userMail.setCellValueFactory(new PropertyValueFactory<User,String>("userEmail"));
         userBir.setCellValueFactory(new PropertyValueFactory<User,Date>("userBirthday"));
 
+        // 从数据库中获取所有User信息，将其转换为ObservableList
+        UserServer userServer = new UserServer();
         List<User> userlist = userServer.getAllUser();
         ObservableList<User> observableUserList = FXCollections.observableList(userlist);
+        // 将其添加到tableview中
         userTable.setItems(observableUserList);
-
-
-        System.out.println(observableUserList.get(1).getUserID());
-
-        System.out.println(observableUserList.get(1).getUserSex());
     }
 }
