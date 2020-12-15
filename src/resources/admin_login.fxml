@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="main.controller.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.LoginController">
     <children>
-        <VBox layoutX="3.0" layoutY="0.0" prefHeight="250.0" prefWidth="390.0" spacing="20.0">
+        <VBox layoutX="3.0" layoutY="0.0" prefHeight="700.0" prefWidth="800.0" spacing="20.0">
             <children>
-                <HBox minHeight="37.0" prefHeight="37.0" prefWidth="411.0">
+                <HBox alignment="CENTER" minHeight="37.0" prefHeight="155.0" prefWidth="800.0">
                     <children>
-                        <Label text="管理员登陆界面">
+                        <Label alignment="CENTER" text="管理员登陆界面">
                             <effect>
                                 <DropShadow height="7.845238095238096" radius="4.1815476190476195" width="10.880952380952381" />
                             </effect>
@@ -33,7 +33,7 @@
                         </Label>
                     </children>
                 </HBox>
-                <GridPane alignment="TOP_RIGHT" prefWidth="380.0">
+                <GridPane alignment="CENTER" prefHeight="215.0" prefWidth="800.0">
                     <children>
                         <Label alignment="TOP_RIGHT" text="Admin_Id" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
                             <effect>

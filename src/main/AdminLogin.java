@@ -75,7 +75,7 @@ public class AdminLogin extends Application {
         } finally {
             in.close();
         }
-        Scene scene = new Scene(page, 638, 600);
+        Scene scene = new Scene(page, 800, 700);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
