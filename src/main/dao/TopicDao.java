@@ -30,17 +30,17 @@ public class TopicDao {
 
         // 将该主题帖下的回复帖都归类到 主题帖0
         // 选取该主题帖下所有回复帖
-        String sql="select * from reply where reTopicID=?";
+        String sql="select * from reply where replyTopicID=?";
         List<Reply> replyList=runner.query(sql,new BeanListHandler<Reply>(Reply.class),topicID);
         // 更改回复帖归属
         for(int i=0;i<replyList.size();i++)
         {
-            sql="update reply set reTopicID=? where reID=?";
+            sql="update reply set replyTopicID=? where replyID=?";
             runner.execute(sql,0,replyList.get(i).getReID());
         }
 
         // 删除该主题帖
-        sql="delete from topic where tID=?";
+        sql="delete from topic where topicID=?";
         int result = runner.execute(sql,topicID);
         return result>=1?true:false;
     }
@@ -50,15 +50,15 @@ public class TopicDao {
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into topic values(?,?,?,?,?,?,?);";
-        int result=runner.execute(sql,topic.gettID(),topic.gettSectionID(),topic.gettUserID(),topic.gettReplyCount(),topic.gettTitle(),topic.gettContents(),topic.gettTime());
+        int result=runner.execute(sql,topic.getTopicID(),topic.getTopicSectionID(),topic.getTopicID(),topic.getTopicReplyCount(),topic.getTopicTitle(),topic.getTopicContents(),topic.getTopicTime());
         return result>=1?true:false;
     }
 
     // 在数据库中修改主题帖
     public boolean updateTopic(Topic topic) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update topic set tSectionID=?,tReplyCount=?,tTitle=?,tContents=? where sID=?";
-        int result=runner.execute(sql,topic.gettSectionID(),topic.gettReplyCount(),topic.gettTitle(),topic.gettContents(),topic.gettID());
+        String sql="update topic set topicSectionID=?,topicReplyCount=?,topicTitle=?,topicContents=? where sectionID=?";
+        int result=runner.execute(sql,topic.getTopicSectionID(),topic.getTopicReplyCount(),topic.getTopicTitle(),topic.getTopicContents(),topic.getTopicID());
         return result>=1?true:false;
     }
 
@@ -66,7 +66,7 @@ public class TopicDao {
     public List<Topic> getTopicByTitle(String title) throws SQLException
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="select * from topic where tTitle=?";
+        String sql="select * from topic where topicTitle=?";
         return runner.query(sql,new BeanListHandler<Topic>(Topic.class),title);
     }
 }

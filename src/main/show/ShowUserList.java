@@ -20,9 +20,9 @@ public class ShowUserList {
         {
             for (int j=0;j<userList.size();j++)
             {
-                System.out.println(userList.get(j).getuID());
+                System.out.println(userList.get(j).getUserID());
                 System.out.println(userList.get(j).getUserName());
-                System.out.println(userList.get(j).getuSex());
+                System.out.println(userList.get(j).getUserSex());
             }
         }
         else

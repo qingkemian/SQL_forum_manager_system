@@ -8,9 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.model.User;
 import main.services.UserServer;
-import org.apache.poi.ss.formula.functions.T;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.Date;
 import java.util.List;
 
@@ -44,15 +42,41 @@ public class UserController {
     public void initialize()
     {
         System.out.println("hello");
+
+        UserServer userServer = new UserServer();
+
+        List<User> userList = userServer.getAllUser();
+
+        if(userList != null)
+        {
+            for (int j=0;j<userList.size();j++)
+            {
+                System.out.println("id"+userList.get(j).getUserID());
+                System.out.println("name"+userList.get(j).getUserName());
+                System.out.println("sex"+userList.get(j).getUserSex());
+            }
+        }
+        else
+        {
+            System.out.println("null");
+        }
+
+
+        // 映射数据进每列
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("userID"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("userName"));
-        userPw.setCellValueFactory(new PropertyValueFactory<User,String>("userPw"));
+        userPw.setCellValueFactory(new PropertyValueFactory<User,String>("userPassword"));
         userSex.setCellValueFactory(new PropertyValueFactory<User, User.Sex>("userSex"));
-        userMail.setCellValueFactory(new PropertyValueFactory<User,String>("userMail"));
-        userBir.setCellValueFactory(new PropertyValueFactory<User,Date>("userBir"));
-        UserServer userServer = new UserServer();
+        userMail.setCellValueFactory(new PropertyValueFactory<User,String>("userEmail"));
+        userBir.setCellValueFactory(new PropertyValueFactory<User,Date>("userBirthday"));
+
         List<User> userlist = userServer.getAllUser();
         ObservableList<User> observableUserList = FXCollections.observableList(userlist);
         userTable.setItems(observableUserList);
+
+
+        System.out.println(observableUserList.get(1).getUserID());
+
+        System.out.println(observableUserList.get(1).getUserSex());
     }
 }

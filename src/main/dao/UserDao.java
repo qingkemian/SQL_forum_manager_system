@@ -24,8 +24,8 @@ public class UserDao {
     public boolean IdentifyAdministrator(User user) throws SQLException
     {
         QueryRunner runner= new QueryRunner(DBUtils.getDataSource());
-        String sql="select * from u where uID=? and userPassword=?";
-        User temp=runner.query(sql, new BeanHandler<User>(User.class),user.getuID(),user.getUserPassword());
+        String sql="select * from u where userID=? and userPassword=?";
+        User temp=runner.query(sql, new BeanHandler<User>(User.class),user.getUserID(),user.getUserPassword());
         if(temp!=null)
             return true;
         else
@@ -47,39 +47,39 @@ public class UserDao {
 
         // 将该用户的所有回复 所有权改为 用户0
         // 选取reply表中该用户的所有记录
-        String sql="select * from reply where reUserID=?";
+        String sql="select * from reply where replyUserID=?";
         List<Reply> replyList=runner.query(sql,new BeanListHandler<Reply>(Reply.class),userID);
         // 将所有该用户的回复 的 用户id 更改为0
         for(int i=0;i<replyList.size();i++)
         {
-            sql="update reply set reUserID=? where reReID=?";
+            sql="update reply set replyUserID=? where replyReID=?";
             runner.execute(sql,0,replyList.get(i).getReID());
         }
 
         // 将该用户的所有主题帖 所有权改为 用户0
         // 选取topic表中该用户的所有记录
-        sql="select * from topic where tUserID=?";
+        sql="select * from topic where topicUserID=?";
         List<Topic> topicList=runner.query(sql,new BeanListHandler<Topic>(Topic.class),userID);
         // 将所有该用户的主题帖 的 贴主id 更改为0
         for(int i=0;i<topicList.size();i++)
         {
-            sql="update topic set tUserID=? where tID=?";
-            runner.execute(sql,0,topicList.get(i).gettID());
+            sql="update topic set topicUserID=? where topicID=?";
+            runner.execute(sql,0,topicList.get(i).getTopicID());
         }
 
         // 将该用户的所有板块 所有权改为 用户0
         // 选取section表中该用户的所有记录
-        sql="select * from section where sMasterID=?";
+        sql="select * from section where sectionMasterID=?";
         List<Section> sectionList=runner.query(sql,new BeanListHandler<Section>(Section.class),userID);
         // 将所有该用户为版主的版块 的 版主id 更改为0
         for(int i=0;i<sectionList.size();i++)
         {
-            sql="update section set sMasterID=? where sID=?";
+            sql="update section set sectionMasterID=? where sectionID=?";
             runner.execute(sql,0,sectionList.get(i).getsID());
         }
 
         // 将改用户从u表删除
-        sql="delete from u where uID=?";
+        sql="delete from u where userID=?";
         int result = runner.execute(sql,userID);
         return result>=1?true:false;
     }
@@ -88,7 +88,7 @@ public class UserDao {
     public User getUserByUserID(int userID) throws SQLException
     {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="select * from u where uID=?";
+        String sql="select * from u where userID=?";
         return runner.query(sql,new BeanHandler<User>(User.class),userID);
     }
 
@@ -96,15 +96,15 @@ public class UserDao {
     public boolean createUser(User user) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into u values(?,?,?,?,?,?)";
-        int result = runner.execute(sql,user.getuID(),user.getUserName(),user.getUserPassword(),user.getuSex(),user.getUserEmail(),user.getUserBirthday());
+        int result = runner.execute(sql,user.getUserID(),user.getUserName(),user.getUserPassword(),user.getUserSex(),user.getUserEmail(),user.getUserBirthday());
         return result>=1?true:false;
     }
 
     // （改）在数据库中更改用户信息
     public boolean updateUser(User user) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update u set userName=?,userPassword=? where uID=?";
-        int result = runner.execute(sql,user.getUserName(),user.getUserPassword(),user.getuID());
+        String sql="update u set userName=?,userPassword=? where userID=?";
+        int result = runner.execute(sql,user.getUserName(),user.getUserPassword(),user.getUserID());
         return result>=1?true:false;
     }
 }

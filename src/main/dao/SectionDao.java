@@ -36,7 +36,7 @@ public class SectionDao {
         for(int i=0;i<topicList.size();i++)
         {
             sql="update topic set tSectionID=? where tID=?";
-            runner.execute(sql,0,topicList.get(i).gettID());
+            runner.execute(sql,0,topicList.get(i).getTopicID());
         }
 
         // 删除该版块

@@ -14,19 +14,27 @@ public class User {
         female
     }
 
-    private int uID;
+    private int userID;
     private String userName;
     private String userPassword;
-    private Sex uSex;
+    private Sex userSex;
     private String userEmail;
     private Date userBirthday;
 
-    public int getuID() {
-        return uID;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setuID(int uID) {
-        this.uID = uID;
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public Sex getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(Sex userSex) {
+        this.userSex = userSex;
     }
 
     public String getUserName() {
@@ -45,13 +53,6 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public Sex getuSex() {
-        return uSex;
-    }
-
-    public void setuSex(Sex uSex) {
-        this.uSex = uSex;
-    }
 
     public String getUserEmail() {
         return userEmail;
