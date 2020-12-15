@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.Controller">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.UserController">
    <children>
       <VBox prefHeight="700.0" prefWidth="800.0">
          <children>
@@ -35,14 +35,14 @@
             </HBox>
             <HBox prefHeight="317.0" prefWidth="800.0">
                <children>
-                  <TableView prefHeight="292.0" prefWidth="800.0">
+                  <TableView fx:id="userTable" prefHeight="292.0" prefWidth="800.0">
                     <columns>
-                      <TableColumn prefWidth="105.0" text="用户ID" />
-                      <TableColumn prefWidth="111.0" text="用户名" />
-                        <TableColumn prefWidth="147.0" text="用户密码" />
-                        <TableColumn prefWidth="90.0" text="性别" />
-                        <TableColumn prefWidth="171.0" text="邮箱" />
-                        <TableColumn prefWidth="126.0" text="生日" />
+                      <TableColumn fx:id="userID" prefWidth="105.0" text="用户ID" />
+                      <TableColumn fx:id="userName" prefWidth="111.0" text="用户名" />
+                        <TableColumn fx:id="userPw" prefWidth="147.0" text="用户密码" />
+                        <TableColumn fx:id="userSex" prefWidth="90.0" text="性别" />
+                        <TableColumn fx:id="userMail" prefWidth="171.0" text="邮箱" />
+                        <TableColumn fx:id="userBir" prefWidth="126.0" text="生日" />
                     </columns>
                   </TableView>
                </children>

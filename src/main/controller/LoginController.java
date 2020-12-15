@@ -36,7 +36,7 @@ public class LoginController implements Initializable {
             application.userlogin(Integer.parseInt(account.getText()), password.getText());
         }catch (Exception e)
         {
-            simpleTools.informationDialog(Alert.AlertType.WARNING,"提示", "警告", "请按要求输入");
+            simpleTools.informationDialog(Alert.AlertType.WARNING,"提示", "警告", "请按要求输入! 用户id只能有数字！");
         }
     }
 
