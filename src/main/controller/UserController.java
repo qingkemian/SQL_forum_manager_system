@@ -56,13 +56,14 @@ public class UserController {
     private TextField inUserPw;
 
     @FXML
-    private SplitMenuButton spSex;
+    private RadioButton rbMale;
 
     @FXML
-    private MenuItem sexMale;
+    private ToggleGroup sex;
 
     @FXML
-    private MenuItem sexFamale;
+    private RadioButton rbFemale;
+
 
     @FXML
     private TextField inUserEmail;
@@ -123,7 +124,11 @@ public class UserController {
             inUserID.setText(String.valueOf(user.getUserID()));
             inUserName.setText(user.getUserName());
             inUserPw.setText(user.getUserPassword());
-
+            if (((user.getUserSex()).toString()).equals("male")) {
+                rbMale.setSelected(true);
+            } else {
+                rbFemale.setSelected(true);
+            }
             inUserEmail.setText(user.getUserEmail());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             inUserBir.setText(simpleDateFormat.format(user.getUserBirthday()));
