@@ -161,4 +161,43 @@ public class UserController {
             simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
         }
     }
+
+    // 修改按钮事件监听器
+    public void update_bt_event(ActionEvent event)
+    {
+        String updateUserID = inUserID.getText();
+        String updateUserName = inUserName.getText();
+        String updateUserPw = inUserPw.getText();
+        try {
+            int id = Integer.parseInt(updateUserID);
+            // 将修改信息写入User中 进行更新
+            UserServer userServer = new UserServer();
+            User udUser = new User();
+            udUser.setUserID(id);
+            udUser.setUserName(updateUserName);
+            udUser.setUserPassword(updateUserPw);
+
+            // 更新并返回结果
+            boolean falg= userServer.updateUser(udUser);
+
+            if (falg)
+            {
+                SimpleTools simpleTools = new SimpleTools();
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "修改成功！");
+                // 从数据库中获取所有User信息，将其转换为ObservableList
+                List<User> userlist = userServer.getAllUser();
+                ObservableList<User> observableUserList = FXCollections.observableList(userlist);
+                // 将其添加到tableview中
+                userTable.setItems(observableUserList);
+
+            } else {
+                SimpleTools simpleTools = new SimpleTools();
+                simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "修改失败！");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            SimpleTools simpleTools = new SimpleTools();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
+        }
+     }
 }
