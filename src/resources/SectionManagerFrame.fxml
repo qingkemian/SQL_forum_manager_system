@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="main.controller.SectionController"
+            prefHeight="700.0" prefWidth="800.0">
+    <children>
+        <VBox prefHeight="700.0" prefWidth="800.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="54.0" prefWidth="800.0">
+                    <children>
+                        <Label text="用户管理界面" textAlignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="50.0">
+                    <children>
+                        <Button fx:id="btAll" mnemonicParsing="false" text="获取全部" />
+                        <Label text="用户ID：" />
+                        <TextField fx:id="inQueryUserID" />
+                        <Button fx:id="btQuery" mnemonicParsing="false" text="查询" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="317.0" prefWidth="800.0">
+                    <children>
+                        <TableView fx:id="userTable" prefHeight="292.0" prefWidth="800.0">
+                            <columns>
+                                <TableColumn fx:id="userID" prefWidth="105.0" text="用户ID" />
+                                <TableColumn fx:id="userName" prefWidth="111.0" text="用户名" />
+                                <TableColumn fx:id="userPw" prefWidth="147.0" text="用户密码" />
+                                <TableColumn fx:id="userSex" prefWidth="90.0" text="性别" />
+                                <TableColumn fx:id="userMail" prefWidth="171.0" text="邮箱" />
+                                <TableColumn fx:id="userBir" prefWidth="126.0" text="生日" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </HBox>
+                <HBox prefHeight="283.0" prefWidth="800.0">
+                    <children>
+                        <VBox prefHeight="282.0" prefWidth="879.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                    <children>
+                                        <Label prefHeight="19.0" prefWidth="70.0" text="用户ID：" />
+                                        <TextField fx:id="inUserID" />
+                                        <Label prefHeight="19.0" prefWidth="70.0" text="用户名：" />
+                                        <TextField fx:id="inUserName" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                    <children>
+                                        <Label prefHeight="18.0" prefWidth="70.0" text="用户密码：" />
+                                        <TextField fx:id="inUserPw" />
+                                        <Label prefHeight="26.0" prefWidth="70.0" text="性别：" />
+                                        <RadioButton fx:id="rbMale" mnemonicParsing="false" prefHeight="22.0" prefWidth="68.0" text="男">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="sex" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <RadioButton fx:id="rbFemale" mnemonicParsing="false" prefHeight="29.0" prefWidth="46.0" text="女" toggleGroup="$sex" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                    <children>
+                                        <Label prefHeight="22.0" prefWidth="70.0" text="邮箱：" />
+                                        <TextField fx:id="inUserEmail" />
+                                        <Label prefHeight="24.0" prefWidth="70.0" text="生日：" />
+                                        <TextField fx:id="inUserBir" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" text="添加" />
+                                        <Button fx:id="btUpdate" mnemonicParsing="false" text="修改" />
+                                        <Button mnemonicParsing="false" text="删除" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children></HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

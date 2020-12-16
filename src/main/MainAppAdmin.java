@@ -98,7 +98,7 @@ public class MainAppAdmin extends Application {
     public AnchorPane initUserManagerAddFrame(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../resources/UserManageFrame.fxml"));
+            loader.setLocation(getClass().getResource("../resources/UserManagerFrame.fxml"));
             AnchorPane root = loader.load();
             return root;
         } catch (IOException e) {

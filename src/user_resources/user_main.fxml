@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="user.controller.UserMainController"
+            prefHeight="732" prefWidth="800.0">
+    <children>
+        <Hyperlink layoutX="697.0" text="退出登录！">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Hyperlink>
+        <MenuBar prefHeight="32.0" prefWidth="690.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="版块">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="所有版块" />
+                        <MenuItem mnemonicParsing="false" text="查找版块" />
+                        <MenuItem mnemonicParsing="false" text="我的版块" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="主题帖">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="所有主题帖" />
+                        <MenuItem mnemonicParsing="false" text="查找主题帖" />
+                        <MenuItem mnemonicParsing="false" text="我的主题帖" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="回复帖管理">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="回复我的" />
+                        <MenuItem mnemonicParsing="false" text="我的回复" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane fx:id="mainFrameAnchorPane" layoutY="24.0" prefHeight="700.0" prefWidth="800.0">
+            <children>
+                <HBox prefHeight="372.0" prefWidth="638.0" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

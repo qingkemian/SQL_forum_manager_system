@@ -17,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/UserManageFrame.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/UserManagerFrame.fxml"));
         primaryStage.setTitle("CZL");
         primaryStage.setScene(new Scene(root, 800, 700));
         primaryStage.show();
