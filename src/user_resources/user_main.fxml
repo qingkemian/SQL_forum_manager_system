@@ -12,7 +12,7 @@
             fx:controller="user.controller.UserMainController"
             prefHeight="732" prefWidth="800.0">
     <children>
-        <Hyperlink layoutX="697.0" text="退出登录！">
+        <Hyperlink layoutX="697.0" onAction="#OUT_M" text="退出登录！">
             <font>
                 <Font size="18.0" />
             </font>

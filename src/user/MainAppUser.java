@@ -57,9 +57,10 @@ public class MainAppUser extends Application {
         }
     }
     public void userlogin(int account,String password){
-        AdminServer ad = new AdminServer();
+        Client client = new Client();
         UserSimpleTools simpleTools = new UserSimpleTools();
-        if(ad.adminLogin(account,password)){
+        String id = Integer.toString(account);
+        if(client.loginInfo(id,password)){
             simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "登录成功！");
             gotousermain();
         } else {

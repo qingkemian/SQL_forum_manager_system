@@ -20,7 +20,7 @@
 
 <AnchorPane prefHeight="732" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="user.controller.UserLoginController">
     <children>
-        <Hyperlink layoutX="683.0" prefHeight="32.0" prefWidth="114.0" text="     登录！">
+        <Hyperlink layoutX="697.0" prefHeight="32.0" prefWidth="114.0" text="     登录！">
             <font>
                 <Font size="18.0" />
             </font>
