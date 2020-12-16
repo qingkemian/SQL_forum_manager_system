@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="main.controller.TopicController"
-            prefHeight="700.0" prefWidth="800.0">
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.TopicController">
     <children>
         <VBox prefHeight="700.0" prefWidth="800.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="54.0" prefWidth="800.0">
                     <children>
-                        <Label text="用户管理界面" textAlignment="CENTER">
+                        <Label text="主题帖管理界面" textAlignment="CENTER">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
@@ -26,21 +27,22 @@
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="50.0">
                     <children>
                         <Button fx:id="btAll" mnemonicParsing="false" text="获取全部" />
-                        <Label text="用户ID：" />
+                        <Label text="主贴标题：" />
                         <TextField fx:id="inQueryUserID" />
                         <Button fx:id="btQuery" mnemonicParsing="false" text="查询" />
                     </children>
                 </HBox>
-                <HBox prefHeight="317.0" prefWidth="800.0">
+                <HBox prefHeight="284.0" prefWidth="800.0">
                     <children>
                         <TableView fx:id="userTable" prefHeight="292.0" prefWidth="800.0">
                             <columns>
-                                <TableColumn fx:id="userID" prefWidth="105.0" text="用户ID" />
-                                <TableColumn fx:id="userName" prefWidth="111.0" text="用户名" />
-                                <TableColumn fx:id="userPw" prefWidth="147.0" text="用户密码" />
-                                <TableColumn fx:id="userSex" prefWidth="90.0" text="性别" />
-                                <TableColumn fx:id="userMail" prefWidth="171.0" text="邮箱" />
-                                <TableColumn fx:id="userBir" prefWidth="126.0" text="生日" />
+                                <TableColumn fx:id="userID" prefWidth="92.0" text="主贴编号" />
+                                <TableColumn fx:id="userName" prefWidth="92.0" text="主贴版块编号" />
+                                <TableColumn fx:id="userPw" prefWidth="101.0" text="主贴用户编号" />
+                        <TableColumn prefWidth="100.0" text="主贴回复次数" />
+                                <TableColumn fx:id="userSex" prefWidth="111.0" text="主贴标题" />
+                                <TableColumn fx:id="userMail" prefWidth="145.0" text="主贴内容" />
+                                <TableColumn fx:id="userBir" prefWidth="122.0" text="主贴时间" />
                             </columns>
                         </TableView>
                     </children>
@@ -51,33 +53,34 @@
                             <children>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                     <children>
-                                        <Label prefHeight="19.0" prefWidth="70.0" text="用户ID：" />
+                                        <Label prefHeight="21.0" prefWidth="86.0" text="主贴编号：" />
                                         <TextField fx:id="inUserID" />
-                                        <Label prefHeight="19.0" prefWidth="70.0" text="用户名：" />
+                                        <Label prefHeight="20.0" prefWidth="86.0" text="主贴版块编号：" />
                                         <TextField fx:id="inUserName" />
                                     </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                     <children>
-                                        <Label prefHeight="18.0" prefWidth="70.0" text="用户密码：" />
+                                        <Label prefHeight="21.0" prefWidth="86.0" text="主贴用户编号：" />
                                         <TextField fx:id="inUserPw" />
-                                        <Label prefHeight="26.0" prefWidth="70.0" text="性别：" />
-                                        <RadioButton fx:id="rbMale" mnemonicParsing="false" prefHeight="22.0" prefWidth="68.0" text="男">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="sex" />
-                                            </toggleGroup>
-                                        </RadioButton>
-                                        <RadioButton fx:id="rbFemale" mnemonicParsing="false" prefHeight="29.0" prefWidth="46.0" text="女" toggleGroup="$sex" />
+                              <Label prefHeight="21.0" prefWidth="86.0" text="主贴回复次数：" />
+                              <TextField fx:id="inUserPw1" />
                                     </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                     <children>
-                                        <Label prefHeight="22.0" prefWidth="70.0" text="邮箱：" />
+                                        <Label prefHeight="26.0" prefWidth="86.0" text="主贴标题：" />
                                         <TextField fx:id="inUserEmail" />
-                                        <Label prefHeight="24.0" prefWidth="70.0" text="生日：" />
+                                        <Label prefHeight="26.0" prefWidth="86.0" text="主贴时间：" />
                                         <TextField fx:id="inUserBir" />
                                     </children>
                                 </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="86.0" text="主贴内容：" />
+                              <TextArea prefHeight="57.0" prefWidth="557.0" />
+                           </children>
+                        </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                     <children>
                                         <Button mnemonicParsing="false" text="添加" />

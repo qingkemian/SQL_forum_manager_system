@@ -48,7 +48,7 @@ public class ReplyServer {
         }
     }
 
-    // 查询主题帖
+    // 通过用户ID查询回复帖
     public List<Reply> queryReplyByUserID(int uID)
     {
         try {
@@ -59,7 +59,7 @@ public class ReplyServer {
         }
     }
 
-    // 更新主题帖
+    // 更新回复帖
     public boolean updateReply(Reply reply)
     {
         try {
