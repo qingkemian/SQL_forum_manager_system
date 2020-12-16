@@ -1,6 +1,7 @@
 package main.services;
 
 import main.dao.UserDao;
+import main.model.Admin;
 import main.model.User;
 
 import java.sql.SQLException;
@@ -15,8 +16,11 @@ public class UserServer {
     private UserDao userDao = new UserDao();
 
     // （登录）传入user对象 判断用户密码是否正确
-    public boolean Login(User user)
+    public boolean Login(int id,String password)
     {
+        User user = new User();
+        user.setUserID(id);
+        user.setUserPassword(password);
         try {
             boolean result=userDao.IdentifyAdministrator(user);
             return result;

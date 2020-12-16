@@ -107,6 +107,17 @@ public class MainAppAdmin extends Application {
         return null;
     }
 
+    public AnchorPane initSectionManagerAddFrame(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../resources/SectionManagerFrame.fxml"));
+            AnchorPane root = loader.load();
+            return root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         launch(args);

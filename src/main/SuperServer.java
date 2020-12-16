@@ -1,6 +1,7 @@
 package main;
 
 import main.services.AdminServer;
+import main.services.UserServer;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -81,9 +82,9 @@ public class SuperServer {
                     int id = Integer.parseInt(array[0].trim());
                     String psw= array[1];
 
-                    AdminServer adminServer = new AdminServer();
+                    UserServer userServer = new UserServer();
 
-                    boolean infofalg = adminServer.adminLogin(id,psw);
+                    boolean infofalg = userServer.Login(id,psw);
 
                     if (infofalg){
                         String reply="true";
