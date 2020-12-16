@@ -44,5 +44,4 @@ public class MainController implements Initializable{
         mainFrameAnchorPane.getChildren().clear();
         mainFrameAnchorPane.getChildren().add(pane);
     }
-
 }

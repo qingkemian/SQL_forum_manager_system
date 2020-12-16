@@ -20,33 +20,21 @@
           <Menu mnemonicParsing="false" text="用户管理">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#do_userManager_event" text="进入管理界面" />
-                  <MenuItem mnemonicParsing="false" text="添加新用户" />
-                  <MenuItem mnemonicParsing="false" text="删除用户" />
-                  <MenuItem mnemonicParsing="false" text="查找用户" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="版块管理">
             <items>
-              <MenuItem mnemonicParsing="false" text="查看所有版块" />
-                  <MenuItem mnemonicParsing="false" text="添加新版块" />
-                  <MenuItem mnemonicParsing="false" text="删除版块" />
-                  <MenuItem mnemonicParsing="false" text="查找版块" />
+              <MenuItem mnemonicParsing="false" text="进入管理界面" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="主题帖管理">
             <items>
-              <MenuItem mnemonicParsing="false" text="查看所有主题帖" />
-                  <MenuItem mnemonicParsing="false" text="添加主题帖" />
-                  <MenuItem mnemonicParsing="false" text="删除主题帖" />
-                  <MenuItem mnemonicParsing="false" text="查找主题帖" />
+              <MenuItem mnemonicParsing="false" text="进入管理界面" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="回复帖管理">
               <items>
-                <MenuItem mnemonicParsing="false" text="查看所有回复帖" />
-                  <MenuItem mnemonicParsing="false" text="添加回复帖" />
-                  <MenuItem mnemonicParsing="false" text="删除回复帖" />
-                  <MenuItem mnemonicParsing="false" text="查找回复帖" />
+                <MenuItem mnemonicParsing="false" text="进入管理界面" />
               </items>
             </Menu>
         </menus>

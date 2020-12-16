@@ -36,7 +36,7 @@ public class MainAppAdmin extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        stage.setTitle("FXML Login Sample");
+        stage.setTitle("Admin Forum Manager System");
         stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
         stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
         gotologin();

@@ -78,7 +78,7 @@
                         </Label>
                         <TextField fx:id="account" prefHeight="26.0" prefWidth="268.0" promptText="please input your id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         <PasswordField fx:id="password" prefWidth="223.0" promptText="please input your password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button id="btn_login" mnemonicParsing="false" prefWidth="80.0" text="登陆" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                        <Button id="btn_login" mnemonicParsing="false" prefWidth="80.0" onAction="#LOGIN_M" text="登陆" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                             <effect>
                                 <DropShadow />
                             </effect>
@@ -86,7 +86,7 @@
                                 <Insets top="15.0" />
                             </GridPane.margin>
                         </Button>
-                        <Button id="btn_clear" mnemonicParsing="false" prefWidth="80.0" text="清除" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button id="btn_clear" mnemonicParsing="false" prefWidth="80.0" onAction="#CLEAR_M" text="清除" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <effect>
                                 <DropShadow />
                             </effect>
