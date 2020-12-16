@@ -52,7 +52,7 @@ public class UserDao {
         // 将所有该用户的回复 的 用户id 更改为0
         for(int i=0;i<replyList.size();i++)
         {
-            sql="update reply set reUserID=? where reReID=?";
+            sql="update reply set reUserID=? where reID=?";
             runner.execute(sql,0,replyList.get(i).getReID());
         }
 
@@ -79,7 +79,7 @@ public class UserDao {
         }
 
         // 将改用户从u表删除
-        sql="delete from u where userID=?";
+        sql = "delete from u where userID=?";
         int result = runner.execute(sql,userID);
         return result>=1?true:false;
     }

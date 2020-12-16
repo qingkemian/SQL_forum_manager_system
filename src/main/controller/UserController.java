@@ -73,7 +73,7 @@ public class UserController {
     @FXML
     private TextField inUserBir;
 
-
+    // 初始化
     public void initialize()
     {
         // 映射数据进每列
@@ -129,32 +129,27 @@ public class UserController {
             Date birthdate = null;
             birthdate = df.parse(userBirText);
 
-            if (userIdText !=  "" && userNameText !=  "" && userPwText != "" && userSexText != null && userEmText != "" && userBirText != ""){
-                // 将信息传入user中
-                User newUser = new User();
-                newUser.setUserID(id);
-                newUser.setUserName(userNameText);
-                newUser.setUserPassword(userPwText);
-                newUser.setUserSex(userSexText);
-                newUser.setUserEmail(userEmText);
-                newUser.setUserBirthday(birthdate);
+            // 将信息传入user中
+            User newUser = new User();
+            newUser.setUserID(id);
+            newUser.setUserName(userNameText);
+            newUser.setUserPassword(userPwText);
+            newUser.setUserSex(userSexText);
+            newUser.setUserEmail(userEmText);
+            newUser.setUserBirthday(birthdate);
 
-                UserServer userServer = new UserServer();
-                boolean newflag = userServer.createUser(newUser);
+            UserServer userServer = new UserServer();
+            boolean newflag = userServer.createUser(newUser);
 
-                if (newflag) {
-                    simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加成功！");
-                    // 从数据库中获取所有User信息，将其转换为ObservableList
-                    List<User> userlist = userServer.getAllUser();
-                    ObservableList<User> observableUserList = FXCollections.observableList(userlist);
-                    // 将其添加到tableview中
-                    userTable.setItems(observableUserList);
-                } else {
-                    simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加失败 请检查id！");
-                }
-
+            if (newflag) {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加成功！");
+                // 从数据库中获取所有User信息，将其转换为ObservableList
+                List<User> userlist = userServer.getAllUser();
+                ObservableList<User> observableUserList = FXCollections.observableList(userlist);
+                // 将其添加到tableview中
+                userTable.setItems(observableUserList);
             } else {
-                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "请输入全部信息！");
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加失败 请检查id！");
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -245,12 +240,10 @@ public class UserController {
             udUser.setUserEmail(updateUserEm);
             udUser.setUserBirthday(birdate);
 
-            boolean falg = false;
-            if (updateUserID.trim() != "" && updateUserName.trim() != "" && updateUserPw.trim() != "" && updateUserSex != null && updateUserEm.trim() != "" && updateUserBir.trim() != "")
             // 更新并返回结果
-               falg = userServer.updateUser(udUser);
+            boolean udfalg = userServer.updateUser(udUser);
 
-            if (falg)
+            if (udfalg)
             {
                 simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "修改成功！");
                 // 从数据库中获取所有User信息，将其转换为ObservableList
@@ -258,7 +251,6 @@ public class UserController {
                 ObservableList<User> observableUserList = FXCollections.observableList(userlist);
                 // 将其添加到tableview中
                 userTable.setItems(observableUserList);
-
             } else {
                 simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "修改失败！");
             }
@@ -270,4 +262,33 @@ public class UserController {
             simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法日期！");
         }
      }
+
+     // 删除按钮事件监听器
+    public void delete_bt_event(ActionEvent event) {
+        String delUserID = inUserID.getText();
+
+        SimpleTools simpleTools = new SimpleTools();
+
+        try {
+            int id = Integer.parseInt(delUserID.trim());
+
+            // 删除用户
+            UserServer userServer = new UserServer();
+            boolean delflag = userServer.deleteUser(id);
+
+            if (delflag) {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "删除成功！");
+                // 从数据库中获取所有User信息，将其转换为ObservableList
+                List<User> userlist = userServer.getAllUser();
+                ObservableList<User> observableUserList = FXCollections.observableList(userlist);
+                // 将其添加到tableview中
+                userTable.setItems(observableUserList);
+            } else {
+                simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "删除失败！");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
+        }
+    }
 }

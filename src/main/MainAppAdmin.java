@@ -9,6 +9,7 @@ package main;
 import javafx.scene.control.Alert;
 import main.controller.MainController;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ import main.tools.SimpleTools;
  *
  * @author itwang
  */
-public class AdminLogin extends Application {
+public class MainAppAdmin extends Application {
     private Stage stage;
     private final double MINIMUM_WINDOW_WIDTH = 400.0;
     private final double MINIMUM_WINDOW_HEIGHT = 250.0;
@@ -49,7 +50,7 @@ public class AdminLogin extends Application {
             LoginController login = (LoginController) replaceSceneContent("../resources/admin_login.fxml");
             login.setApp(this);
         } catch (Exception ex) {
-            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainAppAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void gotomain(){
@@ -57,7 +58,7 @@ public class AdminLogin extends Application {
             MainController main = (MainController) replaceSceneContent("../resources/admin_main.fxml");
             main.setApp(this);
         } catch (Exception ex) {
-            Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainAppAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void userlogin(int account,String password){
@@ -74,22 +75,39 @@ public class AdminLogin extends Application {
     public void useroutmain(){
         gotologin();
     }
+
+    // 主界面
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = AdminLogin.class.getResourceAsStream(fxml);
+        InputStream in = MainAppAdmin.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(AdminLogin.class.getResource(fxml));
+        loader.setLocation(MainAppAdmin.class.getResource(fxml));
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);
         } finally {
             in.close();
         }
-        Scene scene = new Scene(page, 800, 700);
+        Scene scene = new Scene(page, 800, 732);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
     }
+
+    // User管理界面
+    public AnchorPane initUserManagerAddFrame(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../resources/UserManageFrame.fxml"));
+            AnchorPane root = loader.load();
+            return root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public static void main(String[] args) {
         launch(args);
     }

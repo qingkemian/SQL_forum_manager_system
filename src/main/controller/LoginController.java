@@ -6,13 +6,12 @@ package main.controller;
  * @日期:2020-12-13 15:15
  */
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import main.AdminLogin;
+import main.MainAppAdmin;
 import main.tools.SimpleTools;
 
 /**
@@ -22,11 +21,11 @@ import main.tools.SimpleTools;
 public class LoginController implements Initializable {
     @FXML private TextField account;
     @FXML private PasswordField password;
-    private AdminLogin application;
+    private MainAppAdmin application;
 
    private SimpleTools simpleTools = new SimpleTools();
 
-    public void setApp(AdminLogin application){
+    public void setApp(MainAppAdmin application){
         this.application = application;
     }
 

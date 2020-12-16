@@ -84,7 +84,7 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#add_bt_event" text="添加" />
                               <Button fx:id="btUpdate" mnemonicParsing="false" onAction="#update_bt_event" text="修改" />
-                              <Button mnemonicParsing="false" text="删除" />
+                              <Button mnemonicParsing="false" onAction="#delete_bt_event" text="删除" />
                            </children>
                         </HBox>
                      </children>

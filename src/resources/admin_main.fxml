@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.MainController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.MainController">
     <children>
         <Hyperlink layoutX="697.0" onAction="#OUT_M" text="退出登录！">
             <font>
@@ -19,7 +19,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="用户管理">
             <items>
-              <MenuItem mnemonicParsing="false" text="查看所有用户" />
+              <MenuItem mnemonicParsing="false" onAction="#do_userManager_event" text="进入管理界面" />
                   <MenuItem mnemonicParsing="false" text="添加新用户" />
                   <MenuItem mnemonicParsing="false" text="删除用户" />
                   <MenuItem mnemonicParsing="false" text="查找用户" />
@@ -51,7 +51,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane layoutY="24.0" prefHeight="364.0" prefWidth="629.0">
+      <AnchorPane fx:id="mainFrameAnchorPane" layoutY="24.0" prefHeight="700.0" prefWidth="800.0">
          <children>
             <HBox prefHeight="372.0" prefWidth="638.0" />
          </children>

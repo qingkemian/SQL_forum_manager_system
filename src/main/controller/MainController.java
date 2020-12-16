@@ -11,16 +11,21 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import main.AdminLogin;
+import javafx.scene.layout.AnchorPane;
+import main.MainAppAdmin;
+
 
 /**
  *
  * @author itwang
  */
 public class MainController implements Initializable{
-    private AdminLogin application;
+    private MainAppAdmin application;
 
-    public void setApp(AdminLogin application){
+    @FXML
+    private AnchorPane mainFrameAnchorPane;
+
+    public void setApp(MainAppAdmin application){
         this.application = application;
     }
 
@@ -32,6 +37,12 @@ public class MainController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+    }
+
+    public void do_userManager_event(ActionEvent event){
+        AnchorPane pane = new MainAppAdmin().initUserManagerAddFrame();
+        mainFrameAnchorPane.getChildren().clear();
+        mainFrameAnchorPane.getChildren().add(pane);
     }
 
 }
