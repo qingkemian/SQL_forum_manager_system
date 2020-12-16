@@ -10,6 +10,8 @@ import main.model.User;
 import main.services.UserServer;
 import main.tools.SimpleTools;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -110,9 +112,57 @@ public class UserController {
         String userIdText = inUserID.getText();
         String userNameText = inUserName.getText();
         String userPwText = inUserPw.getText();
-
+        User.Sex userSexText = null;
+        if (rbMale.isSelected())
+            userSexText = User.Sex.male;
+        else if (rbFemale.isSelected())
+            userSexText = User.Sex.female;
         String userEmText = inUserEmail.getText();
         String userBirText = inUserBir.getText();
+
+        SimpleTools simpleTools = new SimpleTools();
+
+        try {
+            // 处理数据 将id转成int 将bir转成date
+            int id = Integer.parseInt(userIdText);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthdate = null;
+            birthdate = df.parse(userBirText);
+
+            if (userIdText !=  "" && userNameText !=  "" && userPwText != "" && userSexText != null && userEmText != "" && userBirText != ""){
+                // 将信息传入user中
+                User newUser = new User();
+                newUser.setUserID(id);
+                newUser.setUserName(userNameText);
+                newUser.setUserPassword(userPwText);
+                newUser.setUserSex(userSexText);
+                newUser.setUserEmail(userEmText);
+                newUser.setUserBirthday(birthdate);
+
+                UserServer userServer = new UserServer();
+                boolean newflag = userServer.createUser(newUser);
+
+                if (newflag) {
+                    simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加成功！");
+                    // 从数据库中获取所有User信息，将其转换为ObservableList
+                    List<User> userlist = userServer.getAllUser();
+                    ObservableList<User> observableUserList = FXCollections.observableList(userlist);
+                    // 将其添加到tableview中
+                    userTable.setItems(observableUserList);
+                } else {
+                    simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加失败 请检查id！");
+                }
+
+            } else {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "请输入全部信息！");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
+        } catch (ParseException e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法日期！");
+        }
     }
 
     // 如果表格行被选中，则将数据显示在下面的文本框中
@@ -168,21 +218,40 @@ public class UserController {
         String updateUserID = inUserID.getText();
         String updateUserName = inUserName.getText();
         String updateUserPw = inUserPw.getText();
+
+        User.Sex updateUserSex = null;
+        if (rbMale.isSelected())
+            updateUserSex = User.Sex.male;
+        else if (rbFemale.isSelected())
+            updateUserSex = User.Sex.female;
+        String updateUserEm = inUserEmail.getText();
+        String updateUserBir = inUserBir.getText();
+
+        SimpleTools simpleTools = new SimpleTools();
         try {
-            int id = Integer.parseInt(updateUserID);
+            int id = Integer.parseInt(updateUserID.trim());
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date birdate = null;
+            birdate = df.parse(updateUserBir);
+
             // 将修改信息写入User中 进行更新
             UserServer userServer = new UserServer();
             User udUser = new User();
             udUser.setUserID(id);
             udUser.setUserName(updateUserName);
             udUser.setUserPassword(updateUserPw);
+            udUser.setUserSex(updateUserSex);
+            udUser.setUserEmail(updateUserEm);
+            udUser.setUserBirthday(birdate);
 
+            boolean falg = false;
+            if (updateUserID.trim() != "" && updateUserName.trim() != "" && updateUserPw.trim() != "" && updateUserSex != null && updateUserEm.trim() != "" && updateUserBir.trim() != "")
             // 更新并返回结果
-            boolean falg= userServer.updateUser(udUser);
+               falg = userServer.updateUser(udUser);
 
             if (falg)
             {
-                SimpleTools simpleTools = new SimpleTools();
                 simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "修改成功！");
                 // 从数据库中获取所有User信息，将其转换为ObservableList
                 List<User> userlist = userServer.getAllUser();
@@ -191,13 +260,14 @@ public class UserController {
                 userTable.setItems(observableUserList);
 
             } else {
-                SimpleTools simpleTools = new SimpleTools();
                 simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "修改失败！");
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            SimpleTools simpleTools = new SimpleTools();
             simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
+        } catch (ParseException e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法日期！");
         }
      }
 }

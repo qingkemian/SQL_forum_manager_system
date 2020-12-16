@@ -96,15 +96,15 @@ public class UserDao {
     public boolean createUser(User user) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into u values(?,?,?,?,?,?)";
-        int result = runner.execute(sql,user.getUserID(),user.getUserName(),user.getUserPassword(),user.getUserSex(),user.getUserEmail(),user.getUserBirthday());
+        int result = runner.execute(sql,user.getUserID(),user.getUserName(),user.getUserPassword(),user.getUserSex().toString(),user.getUserEmail(),user.getUserBirthday());
         return result>=1?true:false;
     }
 
     // （改）在数据库中更改用户信息
     public boolean updateUser(User user) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update u set userName=?,userPassword=? where userID=?";
-        int result = runner.execute(sql,user.getUserName(),user.getUserPassword(),user.getUserID());
+        String sql="update u set userName=?,userPassword=?,userSex=?,userEmail=?,userBirthday=? where userID=?";
+        int result = runner.execute(sql,user.getUserName(),user.getUserPassword(),user.getUserSex().toString(),user.getUserEmail(),user.getUserBirthday(),user.getUserID());
         return result>=1?true:false;
     }
 }
