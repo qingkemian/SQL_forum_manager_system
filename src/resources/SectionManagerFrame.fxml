@@ -28,18 +28,18 @@
                     <children>
                         <Button fx:id="btAll" mnemonicParsing="false" text="获取全部" />
                         <Label text="版块名称：" />
-                        <TextField fx:id="inQueryUserID" />
+                        <TextField fx:id="inQuerySectionName" />
                         <Button fx:id="btQuery" mnemonicParsing="false" text="查询" />
                     </children>
                 </HBox>
                 <HBox prefHeight="317.0" prefWidth="800.0">
                     <children>
-                        <TableView fx:id="userTable" prefHeight="292.0" prefWidth="800.0">
+                        <TableView fx:id="sectionTable" prefHeight="292.0" prefWidth="800.0">
                             <columns>
-                                <TableColumn fx:id="userID" prefWidth="105.0" text="版块编号" />
-                                <TableColumn fx:id="userName" prefWidth="111.0" text="版块名称" />
-                                <TableColumn fx:id="userPw" prefWidth="147.0" text="版主编号" />
-                                <TableColumn fx:id="userSex" prefWidth="391.0" text="版块说明" />
+                                <TableColumn fx:id="sectionID" prefWidth="105.0" text="版块编号" />
+                                <TableColumn fx:id="sectionName" prefWidth="111.0" text="版块名称" />
+                                <TableColumn fx:id="sectionMasterID" prefWidth="147.0" text="版主编号" />
+                                <TableColumn fx:id="sectionInfo" prefWidth="391.0" text="版块说明" />
                             </columns>
                         </TableView>
                     </children>
@@ -51,17 +51,17 @@
                                 <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0" spacing="5.0">
                                     <children>
                                         <Label prefHeight="19.0" prefWidth="70.0" text="版块编号：" />
-                              <TextField />
+                              <TextField fx:id="inSectionID" />
                                         <Label prefHeight="19.0" prefWidth="70.0" text="版块名称：" />
-                              <TextField />
+                              <TextField fx:id="inSectionName" />
                                         <Label prefHeight="18.0" prefWidth="70.0" text="版主编号：" />
-                                        <TextField />
+                                        <TextField fx:id="inSectionMasterID" />
                                     </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="165.0" prefWidth="800.0" spacing="20.0">
                            <children>
                               <Label text="版块说明：" />
-                              <TextArea prefHeight="161.0" prefWidth="614.0" />
+                              <TextArea fx:id="inSectionInfo" prefHeight="161.0" prefWidth="614.0" />
                            </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="72.0" prefWidth="800.0" spacing="50.0">
