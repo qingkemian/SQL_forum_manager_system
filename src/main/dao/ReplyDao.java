@@ -1,8 +1,10 @@
 package main.dao;
 
 import main.model.Reply;
+import main.model.Topic;
 import main.utils.DBUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
@@ -28,6 +30,18 @@ public class ReplyDao {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="delete from reply where reID=?";
         int result = runner.execute(sql,replyID);
+
+        // topic中回帖数-1
+        Reply theReply;
+        theReply = getReplyByReplyID(replyID);
+        int id = theReply.getReTopicID();
+        Topic theTopic;
+        TopicDao topicDao = new TopicDao();
+        theTopic =  topicDao.getTopicByID(id);
+        int reCount = theTopic.getTopicReplyCount();
+
+        sql = "update topic set topicTime=? where topicID=?";
+        int res = runner.execute(sql,reCount--,id);
         return result>=1?true:false;
     }
 
@@ -37,14 +51,24 @@ public class ReplyDao {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into reply values(?,?,?,?,?);";
         int result=runner.execute(sql,reply.getReID(),reply.getReTopicID(),reply.getReUserID(),reply.getReContents(),reply.getReTime());
+
+        // topic中回帖数+1
+        Topic theTopic;
+        TopicDao topicDao = new TopicDao();
+        theTopic =  topicDao.getTopicByID(reply.getReTopicID());
+        int reCount = theTopic.getTopicReplyCount();
+
+        sql = "update topic set topicTime=? where topicID=?";
+        int res = runner.execute(sql,reCount--,reply.getReTopicID());
+
         return result>=1?true:false;
     }
 
     // 在数据库中修改回复帖
     public boolean updateReply(Reply reply) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update reply set reTopicID=?,reContents=? where reID=?";
-        int result=runner.execute(sql,reply.getReTopicID(),reply.getReContents(),reply.getReID());
+        String sql="update reply set reTopicID=?,reUserID=?,reContents=?,reTime=? where reID=?";
+        int result=runner.execute(sql,reply.getReTopicID(),reply.getReUserID(),reply.getReContents(),reply.getReTime(),reply.getReID());
         return result>=1?true:false;
     }
 
@@ -54,5 +78,13 @@ public class ReplyDao {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="select * from reply where reUserID=?";
         return runner.query(sql,new BeanListHandler<Reply>(Reply.class),uID);
+    }
+
+    // 在数据库中通过帖子id查询所有回帖
+    public Reply getReplyByReplyID(int reID) throws SQLException
+    {
+        QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
+        String sql="select * from reply where reID=?";
+        return runner.query(sql,new BeanHandler<Reply>(Reply.class),reID);
     }
 }

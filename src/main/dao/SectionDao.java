@@ -57,8 +57,8 @@ public class SectionDao {
     // 在数据库中修改版块
     public boolean updateSection(Section section) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update section set sectionName=?,sectionStatement=? where sectionID=?";
-        int result=runner.execute(sql,section.getSectionName(),section.getSectionStatement(),section.getSectionID());
+        String sql="update section set sectionName=?,sectionMasterID=?,sectionStatement=? where sectionID=?";
+        int result=runner.execute(sql,section.getSectionName(),section.getSectionMasterID(),section.getSectionStatement(),section.getSectionID());
         return result>=1?true:false;
     }
 

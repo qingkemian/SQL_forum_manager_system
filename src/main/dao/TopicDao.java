@@ -4,6 +4,7 @@ import main.model.Reply;
 import main.model.Topic;
 import main.utils.DBUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
@@ -57,8 +58,8 @@ public class TopicDao {
     // 在数据库中修改主题帖
     public boolean updateTopic(Topic topic) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="update topic set topicSectionID=?,topicReplyCount=?,topicTitle=?,topicContents=? where sectionID=?";
-        int result=runner.execute(sql,topic.getTopicSectionID(),topic.getTopicReplyCount(),topic.getTopicTitle(),topic.getTopicContents(),topic.getTopicID());
+        String sql="update topic set topicSectionID=?,topicUserID=?,topicReplyCount=?,topicTitle=?,topicContents=?,topicTime where sectionID=?";
+        int result=runner.execute(sql,topic.getTopicSectionID(),topic.getTopicUserID(),topic.getTopicReplyCount(),topic.getTopicTitle(),topic.getTopicContents(),topic.getTopicContents(),topic.getTopicID());
         return result>=1?true:false;
     }
 
@@ -68,5 +69,13 @@ public class TopicDao {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="select * from topic where topicTitle=?";
         return runner.query(sql,new BeanListHandler<Topic>(Topic.class),title);
+    }
+
+    // 从数据库中通过ID查询主题帖
+    public Topic getTopicByID(int id) throws SQLException
+    {
+        QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
+        String sql="select * from topic where topicID=?";
+        return runner.query(sql,new BeanHandler<Topic>(Topic.class),id);
     }
 }
