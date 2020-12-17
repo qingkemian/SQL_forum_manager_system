@@ -29,12 +29,12 @@
           </Menu>
           <Menu mnemonicParsing="false" text="主题帖管理">
             <items>
-              <MenuItem mnemonicParsing="false" text="进入管理界面" />
+              <MenuItem mnemonicParsing="false" onAction="#do_topicManager_event" text="进入管理界面" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="回复帖管理">
               <items>
-                <MenuItem mnemonicParsing="false" text="进入管理界面" />
+                <MenuItem mnemonicParsing="false" onAction="#do_replyManager_event" text="进入管理界面" />
               </items>
             </Menu>
         </menus>

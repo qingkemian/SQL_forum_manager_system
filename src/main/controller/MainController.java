@@ -50,4 +50,16 @@ public class MainController implements Initializable{
         mainFrameAnchorPane.getChildren().clear();
         mainFrameAnchorPane.getChildren().add(pane);
     }
+
+    public void do_topicManager_event(ActionEvent event){
+        AnchorPane pane = new MainAppAdmin().initTopicManagerAddFrame();
+        mainFrameAnchorPane.getChildren().clear();
+        mainFrameAnchorPane.getChildren().add(pane);
+    }
+
+    public void do_replyManager_event(ActionEvent event){
+        AnchorPane pane = new MainAppAdmin().initReplyManagerAddFrame();
+        mainFrameAnchorPane.getChildren().clear();
+        mainFrameAnchorPane.getChildren().add(pane);
+    }
 }
