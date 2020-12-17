@@ -1,11 +1,21 @@
 package main.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.model.Topic;
+import main.services.TopicServer;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * @描述：
@@ -23,28 +33,28 @@ public class TopicController {
     private Button btQuery;
 
     @FXML
-    private TableView<?> topicTable;
+    private TableView<Topic> topicTable;
 
     @FXML
-    private TableColumn<?, ?> topicID;
+    private TableColumn<Topic, Integer> topicID;
 
     @FXML
-    private TableColumn<?, ?> topicSectionID;
+    private TableColumn<Topic, Integer> topicSectionID;
 
     @FXML
-    private TableColumn<?, ?> topicUserID;
+    private TableColumn<Topic, Integer> topicUserID;
 
     @FXML
-    private TableColumn<?, ?> topicReplyTime;
+    private TableColumn<Topic, Integer> topicReplyTime;
 
     @FXML
-    private TableColumn<?, ?> topicTitle;
+    private TableColumn<Topic, String> topicTitle;
 
     @FXML
-    private TableColumn<?, ?> topicInfo;
+    private TableColumn<Topic, String> topicInfo;
 
     @FXML
-    private TableColumn<?, ?> topicTime;
+    private TableColumn<Topic, Timestamp> topicTime;
 
     @FXML
     private TextField inTopicID;
@@ -75,4 +85,44 @@ public class TopicController {
 
     @FXML
     private Button btDel;
+
+    public void initialize()
+    {
+        topicID.setCellValueFactory(new PropertyValueFactory<Topic,Integer>("topicID"));
+        topicSectionID.setCellValueFactory(new PropertyValueFactory<Topic,Integer>("topicSectionID"));
+        topicUserID.setCellValueFactory(new PropertyValueFactory<Topic,Integer>("topicUserID"));
+        topicReplyTime.setCellValueFactory(new PropertyValueFactory<Topic,Integer>("topicReplyCount"));
+        topicTitle.setCellValueFactory(new PropertyValueFactory<Topic,String>("topicTitle"));
+        topicInfo.setCellValueFactory(new PropertyValueFactory<Topic,String>("topicContents"));
+        topicTime.setCellValueFactory(new PropertyValueFactory<Topic,Timestamp>("topicTime"));
+
+        TopicServer topicServer = new TopicServer();
+        List<Topic> topicList = topicServer.getAllTopic();
+        ObservableList<Topic> observableTopicList = FXCollections.observableList(topicList);
+        topicTable.setItems(observableTopicList);
+
+        topicTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showTopicDetails(newValue));
+    }
+
+    public void showTopicDetails(Topic topic)
+    {
+        if (topic == null)
+            return;
+        else {
+            inTopicID.setText(String.valueOf(topic.getTopicID()));
+            inTopicSectionID.setText(String.valueOf(topic.getTopicSectionID()));
+            inTopicUserID.setText(String.valueOf(topic.getTopicUserID()));
+            inTopicReplyTime.setText(String.valueOf(topic.getTopicReplyCount()));
+            inTopicTitle.setText(topic.getTopicTitle());
+            inTopicInfo.setText(topic.getTopicContents());
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String strTime = "";
+            try {
+                strTime = sdf.format(topic.getTopicTime());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            inTopicTime.setText(strTime);
+        }
+    }
 }
