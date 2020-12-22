@@ -3,15 +3,13 @@ package main.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.model.Section;
 import main.services.SectionServer;
+import main.tools.SimpleTools;
 
+import javafx.event.ActionEvent;
 import java.util.List;
 
 /**
@@ -93,6 +91,55 @@ public class SectionController {
             inSectionName.setText(section.getSectionName());
             inSectionMasterID.setText(String.valueOf(section.getSectionMasterID()));
             inSectionInfo.setText(section.getSectionStatement());
+        }
+    }
+
+    // 展示全部
+    public void show_all(ActionEvent event)
+    {
+        // 获取数据
+        SectionServer sectionServer = new SectionServer();
+        List<Section> sectionList = sectionServer.getAllSection();
+        ObservableList<Section> observableSectionList = FXCollections.observableList(sectionList);
+        // 添加到tableview
+        sectionTable.setItems(observableSectionList);
+    }
+
+    //  添加
+    public void add_bt_event(ActionEvent event)
+    {
+        String sectionIdText = inSectionID.getText();
+        String sectionNameText = inSectionName.getText();
+        String sectionMasterIdText = inSectionMasterID.getText();
+        String sectionStatementText = inSectionInfo.getText();
+
+        SimpleTools simpleTools = new SimpleTools();
+
+        try {
+            int sectionid = Integer.parseInt(sectionIdText);
+            int sectionmasterid = Integer.parseInt(sectionMasterIdText);
+
+            Section newSection = new Section();
+            newSection.setSectionID(sectionid);
+            newSection.setSectionName(sectionNameText);
+            newSection.setSectionMasterID(sectionmasterid);
+            newSection.setSectionStatement(sectionStatementText);
+
+            SectionServer sectionServer = new SectionServer();
+            boolean newflag = sectionServer.createSectin(newSection);
+
+            if(newflag) {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加成功！");
+                List<Section> sectionList = sectionServer.getAllSection();
+                ObservableList<Section> observableSectionList = FXCollections.observableList(sectionList);
+                // 添加到tableview
+                sectionTable.setItems(observableSectionList);
+            } else {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加失败 请检查输入！");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
         }
     }
 }

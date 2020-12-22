@@ -3,15 +3,13 @@ package main.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.model.Reply;
 import main.services.ReplyServer;
+import main.tools.SimpleTools;
 
+import javafx.event.ActionEvent;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -91,6 +89,7 @@ public class ReplyController {
         replyTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showReplyDetails(newValue));
     }
 
+    // 展示细节
     public void showReplyDetails(Reply reply)
     {
         if (reply == null)
@@ -108,6 +107,89 @@ public class ReplyController {
                 e.printStackTrace();
             }
             inReplyTime.setText(strTime);
+        }
+    }
+
+    // 展示全部
+    public void show_all(ActionEvent event)
+    {
+        ReplyServer replyServer = new ReplyServer();
+        List<Reply> replyList = replyServer.getAllReply();
+        ObservableList<Reply> observableReplyList = FXCollections.observableList(replyList);
+
+        replyTable.setItems(observableReplyList);
+    }
+
+    // 添加
+    public void add_bt_event(ActionEvent event)
+    {
+        String reIdText = inReplyID.getText();
+        String reTopicIdText = inReplyTopicID.getText();
+        String reUserIdText = inReplyUserID.getText();
+        String reConText = inReplyInfo.getText();
+        String reTimeText = inReplyTime.getText();
+
+        SimpleTools simpleTools = new SimpleTools();
+
+        try {
+            int reid = Integer.parseInt(reIdText);
+            int retopid = Integer.parseInt(reTopicIdText);
+            int reuserid = Integer.parseInt(reUserIdText);
+            Timestamp time = Timestamp.valueOf(reTimeText);
+
+            Reply newReply = new Reply();
+            newReply.setReID(reid);
+            newReply.setReTopicID(retopid);
+            newReply.setReUserID(reuserid);
+            newReply.setReContents(reConText);
+            newReply.setReTime(time);
+
+            ReplyServer replyServer = new ReplyServer();
+            boolean newflag = replyServer.createReply(newReply);
+
+            if (newflag) {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加成功！");
+                List<Reply> replyList = replyServer.getAllReply();
+                ObservableList<Reply> observableReplyList = FXCollections.observableList(replyList);
+
+                replyTable.setItems(observableReplyList);
+            } else {
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "添加失败 请检查输入！");
+            }
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法时间！");
+        }
+    }
+
+    public void query_bt_event(ActionEvent event)
+    {
+        String queryByUserID = inQueryUserID.getText();
+
+        try {
+            int id = Integer.parseInt(queryByUserID);
+
+            ReplyServer replyServer = new ReplyServer();
+
+            List<Reply> replyList = replyServer.queryReplyByUserID(id);
+
+            if(replyList != null)
+            {
+                ObservableList<Reply> observableReplyList = FXCollections.observableList(replyList);
+
+                replyTable.setItems(observableReplyList);
+            } else {
+                SimpleTools simpleTools = new SimpleTools();
+                simpleTools.informationDialog(Alert.AlertType.INFORMATION, "提示", "信息", "未查询到相关信息！");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            SimpleTools simpleTools = new SimpleTools();
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "提示", "警告", "请输入合法id！");
         }
     }
 }

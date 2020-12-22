@@ -26,10 +26,10 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="50.0">
                     <children>
-                        <Button fx:id="btAll" mnemonicParsing="false" text="获取全部" />
+                        <Button fx:id="btAll" mnemonicParsing="false" onAction="#show_all" text="获取全部" />
                         <Label text="用户ID：" />
                         <TextField fx:id="inQueryUserID" />
-                        <Button fx:id="btQuery" mnemonicParsing="false" text="查询" />
+                        <Button fx:id="btQuery" mnemonicParsing="false" onAction="#query_bt_event" text="查询" />
                     </children>
                 </HBox>
                 <HBox prefHeight="294.0" prefWidth="800.0">
@@ -73,7 +73,7 @@
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                     <children>
-                                        <Button fx:id="btAdd" mnemonicParsing="false" text="添加" />
+                                        <Button fx:id="btAdd" mnemonicParsing="false" onAction="#add_bt_event" text="添加" />
                                         <Button fx:id="btUpdate" mnemonicParsing="false" text="修改" />
                                         <Button fx:id="btDel" mnemonicParsing="false" text="删除" />
                                     </children>
