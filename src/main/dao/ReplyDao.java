@@ -40,8 +40,10 @@ public class ReplyDao {
         theTopic =  topicDao.getTopicByID(id);
         int reCount = theTopic.getTopicReplyCount();
 
-        sql = "update topic set topicTime=? where topicID=?";
-        int res = runner.execute(sql,reCount--,id);
+        reCount -= 1;
+
+        sql = "update topic set topicReplyCount=? where topicID=?";
+        int res = runner.execute(sql,reCount,id);
         return result>=1?true:false;
     }
 
@@ -58,8 +60,10 @@ public class ReplyDao {
         theTopic =  topicDao.getTopicByID(reply.getReTopicID());
         int reCount = theTopic.getTopicReplyCount();
 
-        sql = "update topic set topicTime=? where topicID=?";
-        int res = runner.execute(sql,reCount--,reply.getReTopicID());
+        reCount += 1;
+
+        sql = "update topic set topicReplyCount=? where topicID=?";
+        int res = runner.execute(sql,reCount,reply.getReTopicID());
 
         return result>=1?true:false;
     }
