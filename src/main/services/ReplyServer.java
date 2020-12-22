@@ -2,7 +2,6 @@ package main.services;
 
 import main.dao.ReplyDao;
 import main.model.Reply;
-import main.model.Topic;
 
 import java.sql.SQLException;
 import java.util.List;
